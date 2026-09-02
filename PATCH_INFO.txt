@@ -1,25 +1,16 @@
-PATCH ADMIN AUTH FINAL V4
+PATCH V5 — WHEEL NAMA PESERTA PRESENSI
 
-Masalah yang ditangani:
-- Endpoint /exec aktif, tetapi admin masih menerima "Akses admin ditolak."
-- Pesan generik tersebut menunjukkan deployment Apps Script masih menjalankan Code.gs versi lama.
-- Patch menambahkan normalisasi trim() pada secret dan pesan diagnostik yang lebih spesifik.
-- doGet() kini mengembalikan version:"auth-v4" agar deployment aktif dapat diverifikasi.
-- lib/gas.ts mempertahankan timeout 45 detik untuk cold start Apps Script.
+Tujuan:
+- Wheel mengambil daftar nama langsung dari peserta yang tercatat pada Attendance untuk kegiatan terpilih.
+- Nama peserta tampil di dalam roda.
+- Peserta yang sudah pernah menang tidak tampil lagi pada putaran berikutnya.
+- Backend Apps Script tetap menentukan pemenang; wheel hanya dianimasikan agar berhenti pada nama pemenang tersebut.
+- Tidak perlu mengubah Google Apps Script atau database.
 
-FILE GOOGLE APPS SCRIPT (WAJIB):
-apps-script/Code.gs
-1. Copy seluruh isinya ke editor Google Apps Script yang terikat ke spreadsheet.
-2. Save.
-3. Deploy > Manage deployments > Edit (ikon pensil) > Version: New version > Deploy.
-4. Buka GAS_ENDPOINT /exec di browser.
-5. Pastikan JSON memuat: "version":"auth-v4".
+FILE YANG DIREPLACE/DITAMBAHKAN DI GITHUB:
+1. components/DoorprizeWheel.tsx               (replace)
+2. components/DoorprizeWheel.module.css        (file baru)
+3. app/api/admin/draw/route.ts                  (replace, untuk kompatibilitas demo participantId)
 
-FILE GITHUB:
-lib/gas.ts
-Replace file ini di GitHub, commit, dan tunggu Vercel redeploy.
-
-PENTING:
-- Jangan menaruh API_SECRET di GitHub.
-- GAS_SECRET di Vercel harus sama persis dengan API_SECRET di Script Properties.
-- Jika /exec belum menampilkan version auth-v4, berarti GAS_ENDPOINT menunjuk deployment lama atau deployment belum diperbarui.
+Setelah commit, tunggu Vercel redeploy sampai Ready.
+Lalu buka /admin/doorprize, pilih kegiatan yang sudah memiliki presensi.
