@@ -8,7 +8,7 @@ export default async function ProgramStudiPage({ searchParams }: { searchParams:
         <div className="container">
           <span className="eyebrow" style={{color: "#0b6b5b"}}>Jelajah Studi</span>
           <h1>Program Studi</h1>
-          <p>Temukan program S1, D4, S2, S3, dan Profesi. Kuota sengaja tidak ditampilkan. Gunakan tautan resmi pada setiap kartu untuk memeriksa informasi terbaru.</p>
+          <p>Temukan program S1, D4, S2, S3, dan Profesi. Kuota sengaja tidak ditampilkan. Gunakan tautan resmi pada setiap baris tabel untuk memeriksa informasi terbaru.</p>
         </div>
       </section>
       <section className="section">

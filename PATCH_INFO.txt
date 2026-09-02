@@ -1,0 +1,18 @@
+PATCH SAJA — Program Studi Tabel + Logo UIN + Favicon
+
+Upload/replace file berikut ke repository GitHub dengan struktur folder yang sama:
+
+app/globals.css
+app/layout.tsx
+app/program-studi/page.tsx
+components/ProgramExplorer.tsx
+components/Header.tsx
+components/Footer.tsx
+
+Perubahan:
+1. Halaman Program Studi menggunakan tabel responsif.
+2. Logo header/footer menggunakan https://admisi.uin-suka.ac.id/img/logo_uin.png
+3. Favicon menggunakan logo UIN tersebut.
+4. Tidak mengubah package.json, Apps Script, database, atau file environment.
+
+Setelah commit ke branch yang terhubung Vercel, Vercel akan deploy ulang otomatis.

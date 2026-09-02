@@ -1,11 +1,13 @@
 import Link from "next/link";
 
+const UIN_LOGO = "https://admisi.uin-suka.ac.id/img/logo_uin.png";
+
 export default function Header() {
   return (
     <header className="site-header">
       <div className="container header-inner">
-        <Link href="/" className="brand" aria-label="Beranda Sospro UIN SUKA">
-          <img src="/sospro-mark.svg" alt="Logo microsite Sospro" />
+        <Link href="/" className="brand" aria-label="Beranda Jelajah Studi UIN SUKA">
+          <img className="brand-logo" src={UIN_LOGO} alt="Logo UIN Sunan Kalijaga" />
           <span className="brand-copy">
             <b>Jelajah Studi UIN SUKA</b>
             <span>Microsite Sosialisasi & Promosi</span>
