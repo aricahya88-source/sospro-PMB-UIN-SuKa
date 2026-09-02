@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 import { callGas } from "@/lib/gas";
 import { demoEvents } from "@/data/demo-events";
 
+// Allow enough time for Google Apps Script cold-start on the first request.
+export const maxDuration = 60;
+
 export async function GET() {
   try {
     if (!process.env.GAS_ENDPOINT && process.env.NEXT_PUBLIC_DEMO_MODE === "1") {

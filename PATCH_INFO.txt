@@ -1,27 +1,24 @@
-PATCH FIX ADMIN SECRET V2
+PATCH V3 — Apps Script lambat / timeout 15 detik
 
-Masalah yang diperbaiki:
-- GAS_SECRET dari Vercel dinormalisasi dengan trim().
-- API_SECRET di Apps Script juga dinormalisasi dengan trim().
-- Pesan error sekarang membedakan GAS_SECRET kosong vs nilainya berbeda.
-- Jika berbeda, error menampilkan panjang secret Vercel dan Apps Script (bukan isi secret).
+Gejala yang ditangani:
+- URL GAS_ENDPOINT /exec akhirnya menampilkan {"ok":true,"message":"Sospro API aktif"}, tetapi lambat.
+- Admin menampilkan "Koneksi ke Apps Script melebihi 15 detik".
 
-FILE GITHUB YANG DIGANTI:
+Perubahan:
 1. lib/gas.ts
+   - Timeout dinaikkan dari 15 detik menjadi 45 detik.
+   - Pesan error diperjelas.
+   - Tidak melakukan retry otomatis pada operasi tulis agar tidak berisiko membuat data ganda.
+2. Semua API route yang berbicara ke Apps Script diberi maxDuration = 60 detik.
 
-FILE GOOGLE APPS SCRIPT YANG DIGANTI:
-2. apps-script/Code.gs
-   File ini TIDAK cukup hanya di-upload ke GitHub.
-   Copy seluruh isinya ke editor Google Apps Script yang terikat dengan Spreadsheet.
+File yang harus direplace di GitHub:
+- lib/gas.ts
+- app/api/admin/events/route.ts
+- app/api/admin/attendance/route.ts
+- app/api/admin/draw/route.ts
+- app/api/public/events/route.ts
+- app/api/public/attendance/route.ts
 
-SETELAH PASTE Code.gs:
-Google Apps Script -> Deploy -> Manage deployments -> Edit -> New version -> Deploy.
-Gunakan URL Web App /exec dari deployment aktif sebagai GAS_ENDPOINT.
-
-SETELAH GANTI lib/gas.ts / ENV DI VERCEL:
-Vercel -> Deployments -> Redeploy production deployment.
-
-PASTIKAN:
-GAS_SECRET di Vercel = API_SECRET dari menu Sospro Setup -> Tampilkan API Secret.
-Jangan memakai tanda kutip.
-Pastikan GAS_SECRET aktif untuk environment URL yang sedang dites (Production atau Preview).
+Tidak perlu mengubah Apps Script Code.gs untuk patch ini.
+Tidak perlu mengubah Environment Variables.
+Setelah commit, tunggu Vercel redeploy sampai Ready lalu buka /admin/kegiatan kembali.

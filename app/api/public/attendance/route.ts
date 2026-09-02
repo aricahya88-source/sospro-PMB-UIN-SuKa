@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { callGas } from "@/lib/gas";
 
+// Allow enough time for Google Apps Script cold-start on the first request.
+export const maxDuration = 60;
+
 export async function POST(req: Request) {
   const body = await req.json().catch(() => ({}));
   const { eventId, name, phone, institution } = body;

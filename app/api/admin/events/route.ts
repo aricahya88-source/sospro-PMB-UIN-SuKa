@@ -3,6 +3,9 @@ import { isAdminRequest } from "@/lib/auth";
 import { callGas } from "@/lib/gas";
 import { demoEvents } from "@/data/demo-events";
 
+// Allow enough time for Google Apps Script cold-start on the first request.
+export const maxDuration = 60;
+
 export async function GET(req: NextRequest) {
   if (!isAdminRequest(req)) return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
   try {
