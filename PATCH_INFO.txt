@@ -1,16 +1,16 @@
-PATCH V5 — WHEEL NAMA PESERTA PRESENSI
+PATCH V6 - QR CODE HALAMAN PUBLIK KEGIATAN
 
-Tujuan:
-- Wheel mengambil daftar nama langsung dari peserta yang tercatat pada Attendance untuk kegiatan terpilih.
-- Nama peserta tampil di dalam roda.
-- Peserta yang sudah pernah menang tidak tampil lagi pada putaran berikutnya.
-- Backend Apps Script tetap menentukan pemenang; wheel hanya dianimasikan agar berhenti pada nama pemenang tersebut.
-- Tidak perlu mengubah Google Apps Script atau database.
+File yang perlu direplace di GitHub:
+1. components/AdminEventsManager.tsx
+2. app/globals.css
 
-FILE YANG DIREPLACE/DITAMBAHKAN DI GITHUB:
-1. components/DoorprizeWheel.tsx               (replace)
-2. components/DoorprizeWheel.module.css        (file baru)
-3. app/api/admin/draw/route.ts                  (replace, untuk kompatibilitas demo participantId)
+Perubahan:
+- Tombol "Lihat publik" kini membuka modal QR Code.
+- QR Code otomatis mengarah ke URL publik kegiatan pada domain Vercel aktif.
+- Tersedia tombol Buka halaman publik, Salin tautan, dan Buka QR.
+- Peserta tidak perlu login.
+- QR menggunakan layanan gratis QR Server (goqr.me / api.qrserver.com).
+- Yang dikirim ke layanan QR hanya URL publik kegiatan, tanpa data peserta atau secret admin.
+- Tidak perlu mengubah Apps Script, Google Sheet, atau Environment Variables.
 
-Setelah commit, tunggu Vercel redeploy sampai Ready.
-Lalu buka /admin/doorprize, pilih kegiatan yang sudah memiliki presensi.
+Setelah replace kedua file dan commit, tunggu Vercel selesai redeploy.
