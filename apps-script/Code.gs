@@ -240,7 +240,7 @@ function createSecret_() {
 }
 
 function doGet() {
-  return json_({ ok: true, message: "Sospro API aktif" });
+  return json_({ ok: true, message: "Sospro API aktif", version: "auth-v4" });
 }
 
 function doPost(e) {
