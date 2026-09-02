@@ -416,9 +416,28 @@ function validateEvent_(event, requireId) {
 }
 
 function requireAdmin_(body) {
-  const expected = PropertiesService.getScriptProperties().getProperty("API_SECRET");
-  if (!expected) throw new Error("API_SECRET belum dibuat di Script Properties.");
-  if (String(body.secret || "") !== expected) throw new Error("Akses admin ditolak.");
+  const expectedRaw = PropertiesService.getScriptProperties().getProperty("API_SECRET");
+  if (!expectedRaw) throw new Error("API_SECRET belum dibuat di Script Properties.");
+
+  // Normalisasi untuk mencegah gagal autentikasi karena spasi/newline
+  // yang tidak sengaja ikut tercopy dari Vercel atau dialog Apps Script.
+  const expected = String(expectedRaw).trim();
+  const received = String(body && body.secret ? body.secret : "").trim();
+
+  if (!received) {
+    throw new Error(
+      "Akses admin ditolak: GAS_SECRET tidak terkirim dari Vercel. " +
+      "Pastikan GAS_SECRET tersedia pada environment deployment yang sedang dibuka, lalu Redeploy."
+    );
+  }
+
+  if (received !== expected) {
+    throw new Error(
+      "Akses admin ditolak: GAS_SECRET tidak sama dengan API_SECRET. " +
+      "Panjang secret Vercel=" + received.length + ", Apps Script=" + expected.length + ". " +
+      "Salin ulang API_SECRET tanpa tanda kutip, simpan di Vercel, lalu Redeploy."
+    );
+  }
 }
 
 function rowsAsObjects_(sheetName) {

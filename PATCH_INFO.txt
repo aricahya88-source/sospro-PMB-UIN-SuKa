@@ -1,18 +1,27 @@
-PATCH SAJA — Program Studi Tabel + Logo UIN + Favicon
+PATCH FIX ADMIN SECRET V2
 
-Upload/replace file berikut ke repository GitHub dengan struktur folder yang sama:
+Masalah yang diperbaiki:
+- GAS_SECRET dari Vercel dinormalisasi dengan trim().
+- API_SECRET di Apps Script juga dinormalisasi dengan trim().
+- Pesan error sekarang membedakan GAS_SECRET kosong vs nilainya berbeda.
+- Jika berbeda, error menampilkan panjang secret Vercel dan Apps Script (bukan isi secret).
 
-app/globals.css
-app/layout.tsx
-app/program-studi/page.tsx
-components/ProgramExplorer.tsx
-components/Header.tsx
-components/Footer.tsx
+FILE GITHUB YANG DIGANTI:
+1. lib/gas.ts
 
-Perubahan:
-1. Halaman Program Studi menggunakan tabel responsif.
-2. Logo header/footer menggunakan https://admisi.uin-suka.ac.id/img/logo_uin.png
-3. Favicon menggunakan logo UIN tersebut.
-4. Tidak mengubah package.json, Apps Script, database, atau file environment.
+FILE GOOGLE APPS SCRIPT YANG DIGANTI:
+2. apps-script/Code.gs
+   File ini TIDAK cukup hanya di-upload ke GitHub.
+   Copy seluruh isinya ke editor Google Apps Script yang terikat dengan Spreadsheet.
 
-Setelah commit ke branch yang terhubung Vercel, Vercel akan deploy ulang otomatis.
+SETELAH PASTE Code.gs:
+Google Apps Script -> Deploy -> Manage deployments -> Edit -> New version -> Deploy.
+Gunakan URL Web App /exec dari deployment aktif sebagai GAS_ENDPOINT.
+
+SETELAH GANTI lib/gas.ts / ENV DI VERCEL:
+Vercel -> Deployments -> Redeploy production deployment.
+
+PASTIKAN:
+GAS_SECRET di Vercel = API_SECRET dari menu Sospro Setup -> Tampilkan API Secret.
+Jangan memakai tanda kutip.
+Pastikan GAS_SECRET aktif untuk environment URL yang sedang dites (Production atau Preview).
