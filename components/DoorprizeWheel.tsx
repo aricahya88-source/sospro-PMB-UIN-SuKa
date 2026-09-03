@@ -200,6 +200,57 @@ export default function DoorprizeWheel() {
         </div>
       )}
 
+      <section className={styles.participantCard} aria-labelledby="participant-list-title">
+        <div className={styles.participantHeader}>
+          <div>
+            <span className={styles.participantEyebrow}>Peserta Kegiatan</span>
+            <h3 id="participant-list-title">Daftar Peserta Presensi</h3>
+            <p>Daftar ini diambil langsung dari data presensi kegiatan yang dipilih.</p>
+          </div>
+          <div className={styles.participantCount} title="Jumlah peserta yang sudah presensi">
+            <i className="bi bi-people-fill" aria-hidden="true" />
+            <strong>{participants.length}</strong> peserta
+          </div>
+        </div>
+
+        {loadingParticipants ? (
+          <div className={styles.participantEmpty}>
+            <i className="bi bi-arrow-repeat" aria-hidden="true" /> Memuat daftar peserta presensi...
+          </div>
+        ) : !eventId ? (
+          <div className={styles.participantEmpty}>
+            <i className="bi bi-info-circle" aria-hidden="true" /> Pilih kegiatan terlebih dahulu untuk melihat daftar peserta.
+          </div>
+        ) : participants.length === 0 ? (
+          <div className={styles.participantEmpty}>
+            <i className="bi bi-person-x" aria-hidden="true" /> Belum ada peserta yang melakukan presensi pada kegiatan ini.
+          </div>
+        ) : (
+          <div className={styles.participantTableWrap}>
+            <table className={styles.participantTable}>
+              <thead>
+                <tr>
+                  <th scope="col">No.</th>
+                  <th scope="col">Nama Peserta</th>
+                  <th scope="col">Sekolah / Instansi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {participants.map((participant, index) => (
+                  <tr key={participant.id}>
+                    <td>{index + 1}</td>
+                    <td>
+                      <strong>{participant.name}</strong>
+                    </td>
+                    <td>{participant.institution || "—"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </section>
+
       <div className={styles.layout}>
         <div>
           <div className={styles.wheelStage}>
@@ -254,8 +305,8 @@ export default function DoorprizeWheel() {
         </div>
 
         <div className="winner-card">
-          <span className="badge">Doorprize</span>
-          <h2 style={{ fontSize: 30 }}>Wheel Peserta Presensi</h2>
+          <span className="badge">Pengundian</span>
+          <h2 style={{ fontSize: 30 }}>Putar Doorprize</h2>
 
           {loadingParticipants ? (
             <div className="notice green">Memuat nama peserta presensi...</div>

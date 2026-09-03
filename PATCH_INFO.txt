@@ -1,16 +1,24 @@
-PATCH V6 - QR CODE HALAMAN PUBLIK KEGIATAN
-
-File yang perlu direplace di GitHub:
-1. components/AdminEventsManager.tsx
-2. app/globals.css
+PATCH V8 — DAFTAR PESERTA DOORPRIZE TANPA STATUS
 
 Perubahan:
-- Tombol "Lihat publik" kini membuka modal QR Code.
-- QR Code otomatis mengarah ke URL publik kegiatan pada domain Vercel aktif.
-- Tersedia tombol Buka halaman publik, Salin tautan, dan Buka QR.
-- Peserta tidak perlu login.
-- QR menggunakan layanan gratis QR Server (goqr.me / api.qrserver.com).
-- Yang dikirim ke layanan QR hanya URL publik kegiatan, tanpa data peserta atau secret admin.
-- Tidak perlu mengubah Apps Script, Google Sheet, atau Environment Variables.
+1. Tabel "Daftar Peserta Presensi" tetap tampil di bawah Wheel Peserta Presensi.
+2. Kolom tabel sekarang hanya:
+   - No.
+   - Nama Peserta
+   - Sekolah / Instansi
+3. Kolom "Status Doorprize" dihapus sepenuhnya dari tampilan.
+4. Logika wheel tidak berubah: peserta yang sudah pernah menang tetap tidak masuk putaran berikutnya.
+5. Nomor HP tetap tidak ditampilkan untuk menjaga privasi peserta.
 
-Setelah replace kedua file dan commit, tunggu Vercel selesai redeploy.
+FILE YANG DIREPLACE DI GITHUB:
+- components/DoorprizeWheel.tsx
+- components/DoorprizeWheel.module.css
+
+Tidak perlu mengubah:
+- Google Apps Script
+- Google Sheets
+- Environment Variables Vercel
+- Struktur database
+- app/admin/doorprize/page.tsx
+
+Setelah replace kedua file, Commit changes dan tunggu Vercel redeploy sampai Ready.

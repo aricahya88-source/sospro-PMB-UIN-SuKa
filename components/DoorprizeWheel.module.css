@@ -151,3 +151,127 @@
     width: 76px;
   }
 }
+
+.participantCard {
+  margin: 0 0 32px;
+  background: #ffffff;
+  border: 1px solid rgba(7, 95, 103, 0.14);
+  border-radius: 18px;
+  box-shadow: 0 12px 34px rgba(7, 95, 103, 0.08);
+  overflow: hidden;
+}
+
+.participantHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  padding: 22px 24px 18px;
+  border-bottom: 1px solid #e8efed;
+}
+
+.participantEyebrow {
+  display: inline-block;
+  margin-bottom: 5px;
+  color: #0b6b5b;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.participantHeader h3 {
+  margin: 0;
+  color: #17363a;
+  font-size: clamp(20px, 2.3vw, 27px);
+}
+
+.participantHeader p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.participantCount {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 12px;
+  border-radius: 999px;
+  background: #edf7f3;
+  color: #075f67;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.participantCount i {
+  color: #0b6b5b;
+}
+
+.participantTableWrap {
+  max-height: 390px;
+  overflow: auto;
+}
+
+.participantTable {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 540px;
+  font-size: 13px;
+}
+
+.participantTable th,
+.participantTable td {
+  padding: 13px 16px;
+  border-bottom: 1px solid #edf1f0;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.participantTable th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #f4f8f7;
+  color: #38565a;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.participantTable tbody tr:hover {
+  background: #fafcfb;
+}
+
+.participantTable td:first-child,
+.participantTable th:first-child {
+  width: 62px;
+  text-align: center;
+}
+
+
+.participantEmpty {
+  padding: 26px 24px;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+.participantEmpty i {
+  margin-right: 6px;
+  color: #0b6b5b;
+}
+
+@media (max-width: 700px) {
+  .participantHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .participantTableWrap {
+    max-height: 340px;
+  }
+}
